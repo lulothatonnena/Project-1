@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const target = event.target;
         const taskIndex = target.parentElement.dataset.index;
 
-        if (target.tagName === 'BUTTON') {
+        if (target.tagName === 'BUTTON' && target.textContent === 'Delete') {
             tasks.splice(taskIndex, 1);
-        } else if (target.tagName === 'LI') {
+        } else if (target.tagName === 'BUTTON' && target.textContent === 'Complete') {
             tasks[taskIndex].completed = !tasks[taskIndex].completed;
         }
 
@@ -50,10 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 taskItem.textContent = task.text;
                 taskItem.dataset.index = index;
                 if (task.completed) taskItem.classList.add('completed');
+                const completeButton = document.createElement('button');
+                completeButton.textContent = 'Complete';
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
+                taskItem.appendChild(completeButton);
                 taskItem.appendChild(deleteButton);
                 taskList.appendChild(taskItem);
             });
     }
 });
+
